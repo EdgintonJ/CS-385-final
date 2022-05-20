@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<script src="initShaders.js"></script>
+<script src="MV.js"></script>
+<script src="MatrixStack.js"></script>
+<script src="Sphere.js"></script>
+<script src="Cube.js"></script>
+<script src="Sphere_texture.js"></script>
+<script src="main.js"></script>
+
+
+<script id="Carbon-vertex-shader" type="x-shader/x-vertex">
+    in  vec4 aPosition;
+    in  vec2 aTexCoord;
+
+    out vec2 vTexCoord;
+
+    uniform mat4 P;
+    uniform mat4 MV;
+
+    void main()
+    {
+        vTexCoord = 0.5 * (aPosition.xy + vec2(1));
+        gl_Position = P * MV * aPosition;
+    }
+</script>
+<script id="Carbon-fragment-shader" type="x-shader/x-fragment">
+    precision highp float;
+
+    in vec2 vTexCoord;
+
+    out vec4 fColor;
+
+    uniform vec4 color;
+
+    void main()
+    {
+
+        float x = vTexCoord.x;
+        float y = vTexCoord.y;
+
+        float radius = length( vTexCoord );
+        float a = degrees( atan( y, x ) ) / 50.0;
+
+        vec4 blue = vec4( 0, 0, a, 1 );
+        vec4 red = vec4( a, 0, 0, 1 );
+        vec4 white = vec4( a, a, a, 1 );
+
+        const float r_r = 0.85;
+        const float w_r = 0.7;
+
+        if (radius > r_r){
+        fColor = red;
+        }
+        else if (radius > w_r){
+        fColor = white;
+        }
+        else{
+            fColor = blue;
+        }
+    }
+</script>
+
+
+
+<script id="Hydro-vertex-shader" type="x-shader/x-vertex">
+    in  vec4 aPosition;
+    in  vec2 aTexCoord;
+
+    out vec2 vTexCoord;
+
+    uniform mat4 P;
+    uniform mat4 MV;
+
+    void main()
+    {
+        vTexCoord = 0.5 * (aPosition.xy + vec2(1));
+        gl_Position = P * MV * aPosition;
+    }
+</script>
+<script id="Hydro-fragment-shader" type="x-shader/x-fragment">
+    precision highp float;
+
+    in vec2 vTexCoord;
+
+    out vec4 fColor;
+
+    uniform vec4 color;
+    uniform sampler2D tex;
+
+    void main()
+    {
+
+        float x = vTexCoord.x;
+        float y = vTexCoord.y;
+
+        float radius = length( vTexCoord );
+        float a = degrees( atan( y, x ) ) / 50.0;
+
+        vec4 white = vec4( a, a, a, 1 );
+        vec4 green = vec4( 0, a, 0, 1 );
+
+        const float g_r = .99;
+        const float w_r = 0.85;
+        const float gg_r = 0.7;
+        const float ww_r = 0.55;
+
+        if (radius > g_r){
+        fColor = green;
+        }
+        else if (radius > w_r){
+        fColor = white;
+        }
+        else if (radius > gg_r){
+        fColor = green;
+        }
+        else if (radius > ww_r){
+        fColor = white;
+        }
+        else{
+            fColor = green;
+        }
+    }
+</script>
+
+
+
+<script id="Bond-vertex-shader" type="x-shader/x-vertex">#version 300 es
+
+        in vec4 aPosition;
+        in vec4 aColor;
+        in vec2 aTexCoord;
+
+        out vec4 vColor;
+        out vec2 vTexCoord;
+
+        uniform mat4 MV;
+        uniform mat4 P;
+
+        void main()
+        {
+            vColor = aColor;
+            vTexCoord = aTexCoord;
+            // vTexCoord = 0.5 * (aPosition.xy + vec2(1));
+            // vTexCoord = aPosition.xy;
+            // gl_PointSize = 3.0;
+            gl_Position = P * MV * aPosition;
+            // gl_Position = 0.8 * aPosition;
+            // gl_Position.w = 1.0;
+        }
+</script>
+<script id="Bond-fragment-shader" type="x-shader/x-fragment">#version 300 es
+        precision highp float;
+
+        in vec4 vColor;
+        in vec2 vTexCoord;
+
+        out vec4 fColor;
+
+        uniform vec4  color;
+        uniform sampler2D tex;
+
+        void main()
+        {
+        // float x = vTexCoord.x;
+        // float y = vTexCoord.y;
+
+        fColor = texture(tex, vTexCoord);
+
+        // fColor.rgb = fColor.rgb;
+
+        // fColor = vec4(y, 0, x, 1);
+
+        // fColor = color;
+
+        }
+    </script>
+
+<canvas id="webgl-canvas" width="800" height="800"></canvas>
+
+<!-- fColor = color;-->
