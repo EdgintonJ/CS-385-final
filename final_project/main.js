@@ -75,20 +75,6 @@ function init() {
     viewMatrix = lookAt(vec3(.9, 0, .9), vec3(0, 0, 0), vec3(.4, 1, -.5))  ;
     viewProjMat = mult(projectionMatrix, viewMatrix);
 
-    // initTexture("./blue_orange.png")
-
-    // let bond_tex = initTexture("https://webglfundamentals.org/webgl/resources/f-texture.png");
-    let bond_tex = initTexture("https://www.business2community.com/wp-content/uploads/2013/02/background-image-vertical-lines-and-stripes-seamless-tileable-dark-orange-blue-22rp5b2.png");
-    /*gl.bindTexture(gl.TEXTURE_2D, bond_tex);
-    gl.generateMipmap(gl.TEXTURE_2D);
-    gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER , gl.NEAREST  );
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, bond_tex);*/
-
-    // initTexture("./blue_orange.bmp");
-
-    /*gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, bond_tex)*/
-
     // Bonds
     let B0 = new Cube()
     let B1 = new Cube()
