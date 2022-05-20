@@ -2,9 +2,6 @@
 function Sphere( slices, stacks, type, vertexShader, fragmentShader) {
     let i, j;  // loop counters
 
-    /*let program = initShaders(gl,
-        vertexShader || "Sphere-vertex-shader",
-        fragmentShader || "Sphere-fragment-shader");*/
     let program;
     if (type === 'c'){
         program = initShaders(gl,
@@ -16,23 +13,6 @@ function Sphere( slices, stacks, type, vertexShader, fragmentShader) {
             vertexShader || "Hydro-vertex-shader",
             fragmentShader || "Hydro-fragment-shader");
     }
-
-
-    // const shaderProgram = initShaderProgram(gl, vertexShader, fragmentShader);
-
-    /*const programInfo = {
-        program: program,
-        attribLocations: {
-            vertexPosition: gl.getAttribLocation(program, 'aVertexPosition'),
-            textureCoord: gl.getAttribLocation(program, 'aTextureCoord'),
-        },
-        uniformLocations: {
-            projectionMatrix: gl.getUniformLocation(program, 'uProjectionMatrix'),
-            modelViewMatrix: gl.getUniformLocation(program, 'uModelViewMatrix'),
-            uSampler: gl.getUniformLocation(program, 'uSampler'),
-        }
-    };*/
-
 
     let nSlices = slices || 20; // Default number of slices
     let nStacks = stacks || 12; // Default number of stacks
