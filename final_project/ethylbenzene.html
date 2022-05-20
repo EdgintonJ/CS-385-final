@@ -127,10 +127,8 @@
 <script id="Bond-vertex-shader" type="x-shader/x-vertex">#version 300 es
 
         in vec4 aPosition;
-        in vec4 aColor;
         in vec2 aTexCoord;
 
-        out vec4 vColor;
         out vec2 vTexCoord;
 
         uniform mat4 MV;
@@ -138,20 +136,14 @@
 
         void main()
         {
-            vColor = aColor;
             vTexCoord = aTexCoord;
-            // vTexCoord = 0.5 * (aPosition.xy + vec2(1));
-            // vTexCoord = aPosition.xy;
-            // gl_PointSize = 3.0;
             gl_Position = P * MV * aPosition;
-            // gl_Position = 0.8 * aPosition;
-            // gl_Position.w = 1.0;
+
         }
 </script>
 <script id="Bond-fragment-shader" type="x-shader/x-fragment">#version 300 es
         precision highp float;
 
-        in vec4 vColor;
         in vec2 vTexCoord;
 
         out vec4 fColor;
@@ -161,20 +153,10 @@
 
         void main()
         {
-        // float x = vTexCoord.x;
-        // float y = vTexCoord.y;
 
         fColor = texture(tex, vTexCoord);
-
-        // fColor.rgb = fColor.rgb;
-
-        // fColor = vec4(y, 0, x, 1);
-
-        // fColor = color;
 
         }
     </script>
 
 <canvas id="webgl-canvas" width="800" height="800"></canvas>
-
-<!-- fColor = color;-->
